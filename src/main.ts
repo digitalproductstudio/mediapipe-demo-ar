@@ -13,7 +13,7 @@ let runningMode : RunningMode = "VIDEO";
 let gestureRecognizer : GestureRecognizer | undefined;
 let isWebcamRunning : boolean = false;
 let lastVideoTime = -1;
-let results : GestureRecognizerResult | undefined = null;
+let results : GestureRecognizerResult | undefined = undefined;
 
 // declare DOM elements
 const video = document.querySelector('#webcam') as HTMLVideoElement;
