@@ -30,13 +30,22 @@ export class Model {
         this.model.position.set(x, y, z);
     }
 
-    public setRotation() {}
+    public setRotation(x: number, y: number, z: number) {
+        if(!this.model) return;
+        this.model.rotation.set(x, y, z);
+    }
 
-    public setScale() {}
+    public setScale(x: number, y: number, z: number) {
+        if(!this.model) return;
+        this.model.scale.set(x, y, z);
+    }
 
-    public showModel() {}
+    public toggleVisibility(visible: boolean) {
+        if(!this.model) return;
+        this.model.visible = visible;
+    }
 
-    public hideModel() {}
-
-    public getHand() {}
+    public getHand() {
+        return this.hand;
+    }
 }
