@@ -88,6 +88,35 @@ async function enableWebcam() {
     console.error(e);
   }
 }
-async function predictWebcam() {}
+async function predictWebcam() {
+  if(!video) return;
+
+  // check when last predicted
+  const now = Date.now();
+  if(video.currentTime === lastVideoTime) {
+    // update the video time
+    lastVideoTime = video.currentTime;
+    // predict
+    results = gestureRecognizer?.recognizeForVideo(video, now);
+  }
+
+  // clear the canvas, so we can draw the new results
+  canvasCtx.save();
+  canvasCtx.clearRect(0, 0, canvasElement.width, canvasElement.height);
+
+  // update the dimensions of the canvas
+  canvasElement.style.height = `${video.videoHeight}px`;
+  canvasElement.style.width = `${video.videoWidth}px`;
+
+
+  // by restoring the canvas, we can draw the results
+  canvasCtx.restore();
+
+
+  // rerun prediction, when all logic is done inside this method
+  if(isWebcamRunning) {
+    window.requestAnimationFrame(predictWebcam);
+  }
+}
 
 async function map3DModel() {}
