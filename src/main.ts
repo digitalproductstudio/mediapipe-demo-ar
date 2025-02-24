@@ -28,8 +28,6 @@ let SCENE : Scene
 const video = document.querySelector('#webcam') as HTMLVideoElement;
 const canvasElement = document.querySelector('#output_canvas') as HTMLCanvasElement;
 const canvasCtx = canvasElement.getContext('2d') as CanvasRenderingContext2D;
-const gestureOutput = document.querySelector('#gesture_output') as HTMLDivElement;
-const btnEnableWebcam = document.querySelector('#webcamButton') as HTMLButtonElement;
 const ARLayers = document.querySelector('#ar-layers') as HTMLElement;
 
 init();
@@ -132,12 +130,7 @@ async function predictWebcam() {
 
   // check when last predicted
   const now = Date.now();
-  if(video.currentTime !== lastVideoTime) {
-    // update the video time
-    lastVideoTime = video.currentTime;
-    // predict
-    results = gestureRecognizer?.recognizeForVideo(video, now);
-  }
+  results = gestureRecognizer?.recognizeForVideo(video, now);
 
   // clear the canvas, so we can draw the new results
   canvasCtx.save();
@@ -221,7 +214,7 @@ async function map3DModel(
 
 
   // scale
-  const scale = Math.sqrt(dX * dX + dY * dY) * 0.1;
+  const scale = Math.sqrt(dX * dX + dY * dY) * 0.05;
   model.setScale(scale, scale, scale);
 
   
