@@ -62,7 +62,25 @@ async function createGestureRecognizer() {
   )
 
 }
-async function enableWebcam() {}
+async function enableWebcam() {
+  isWebcamRunning = !isWebcamRunning;
+  if(!video) return;
+
+  const videoOptions = {
+    video: true,
+    width: { ideal: 1280 },
+    height: { ideal: 720 },
+    frameRate: { ideal: 30, max: 60 }
+  };
+
+  try {
+    const stream = await navigator.mediaDevices.getUserMedia(videoOptions);
+    video.srcObject = stream;
+    video.play();
+  } catch(e) {
+    console.error(e);
+  }
+}
 async function predictWebcam() {}
 
 async function map3DModel() {}
