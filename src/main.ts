@@ -114,7 +114,6 @@ async function predictWebcam() {
   canvasElement.style.width = `${video.videoWidth}px`;
 
   if(results) {
-    console.log('test');
     // display landmarks
     displayLandmarks(canvasCtx, results);
     

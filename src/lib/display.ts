@@ -14,13 +14,19 @@ export const displayLandmarks = (
   if (!results?.landmarks) return;
 
   results.landmarks.forEach((landmarks, index) => {
+
+
+    // handedness
+    const handedness = results.handedness[index][0];
+    const hand = handedness?.displayName === "Right" ? "R" : "L";
+
     pencil.drawConnectors(landmarks, GestureRecognizer.HAND_CONNECTIONS, {
-      color: (index === 0) ? "#00FF00" : "#00FFFF",
+      color: (hand === "L") ? "purple" : "yellow",
       lineWidth: 5,
     });
     pencil.drawLandmarks(landmarks, {
-      color: (index === 0) ? "#FF0000" : "#FFFF00",
-      fillColor: "green",
+      color: (hand === "R") ? "black" : "orange",
+      fillColor: "white",
       radius: 4,
     });
   });
