@@ -15,11 +15,11 @@ export const displayLandmarks = (
 
   results.landmarks.forEach((landmarks, index) => {
     pencil.drawConnectors(landmarks, GestureRecognizer.HAND_CONNECTIONS, {
-      color: (index === 0) ? "red" : "blue",
+      color: (index === 0) ? "#00FF00" : "#00FFFF",
       lineWidth: 5,
     });
     pencil.drawLandmarks(landmarks, {
-      color: (index === 0) ? "red" : "blue",
+      color: (index === 0) ? "#FF0000" : "#FFFF00",
       fillColor: "green",
       radius: 4,
     });
