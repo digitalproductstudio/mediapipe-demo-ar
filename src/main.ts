@@ -23,3 +23,16 @@ const gestureOutput = document.querySelector('#gesture_output') as HTMLDivElemen
 const btnEnableWebcam = document.querySelector('#webcamButton') as HTMLButtonElement;
 const ARLayers = document.querySelector('#ar-layers') as HTMLElement;
 
+init();
+
+async function init() {
+  // alert('Hello World');
+}
+
+
+
+async function createGestureRecognizer() {}
+async function enableWebcam() {}
+async function predictWebcam() {}
+
+async function map3DModel() {}
