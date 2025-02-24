@@ -29,8 +29,14 @@ init();
 async function init() {
   try {
     await hasGetUserMedia();
+    console.log("User media available");
+
     await createGestureRecognizer();
+    console.log("Gesture recognizer created");
+    
     await enableWebcam();
+    console.log("Webcam enabled");
+  
   } catch(e) {
     console.error(e);
   }
@@ -38,7 +44,9 @@ async function init() {
 
 
 
-async function createGestureRecognizer() {}
+async function createGestureRecognizer() {
+
+}
 async function enableWebcam() {}
 async function predictWebcam() {}
 
