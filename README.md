@@ -13,7 +13,7 @@ This project demonstrates the use of augmented reality (AR) on hand tracking usi
 
 1. Clone the repository:
     ```sh
-    git clone https://github.com/digitalproductstudio/mediapipe-ar-hands
+    git clone https://github.com/digitalproductstudio/mediapipe-demo-ar
     ```
 2. Navigate to the project directory:
     ```sh
