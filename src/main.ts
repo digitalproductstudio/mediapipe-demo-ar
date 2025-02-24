@@ -66,7 +66,16 @@ async function createScene() {
     "Right"
   );
 
+  let TOKTOK = new Model(
+    "birbs/scene.gltf",
+    new THREE.Vector3(0.005, 0.005, 0.005),
+    new THREE.Vector3(0.5, 0, 0),
+    new THREE.Vector3(0, 0, 0),
+    "Left"
+  );
+
   SCENE.add3DModel(bottleabeer);
+  SCENE.add3DModel(TOKTOK);
 
 }
 
@@ -154,12 +163,14 @@ async function predictWebcam() {
 
       // position, rotate and scale the model to the hand
       if(model) {
+        model.toggleVisibility(true);
         map3DModel(landmarks, model);
-      }
+      }      
     });
 
+    // hide the model when no hand is detected
+    toggleVisibility(results);
   }
-
 
   // by restoring the canvas, we can draw the results
   canvasCtx.restore();
@@ -170,6 +181,17 @@ async function predictWebcam() {
     window.requestAnimationFrame(predictWebcam);
     SCENE.render();
   }
+}
+
+function toggleVisibility(results) {
+  SCENE.models.forEach((model) => {
+    const handIndex = results?.handedness.findIndex(
+      (handedness) => handedness[0].displayName === model.getHand()
+    );
+    if (handIndex === -1) {
+      model.toggleVisibility(false);
+    }
+  });
 }
 
 async function map3DModel(landmarks, model) {
