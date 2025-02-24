@@ -1,10 +1,11 @@
 import * as THREE from "three";
+import { Model } from "./Model";
 
 export class Scene {
     private scene: THREE.Scene;
     private camera: THREE.PerspectiveCamera;
     private renderer: THREE.WebGLRenderer;
-    public models : [] = [];
+    public models : Model[] = [];
 
     constructor( 
         width: number,
@@ -31,7 +32,7 @@ export class Scene {
         this.camera.position.z = 1;
      }
 
-    public add3DModel( model ) {
+    public add3DModel( model : Model ) {
         this.models.push(model);
         model.loadModel((loadedmodel) => {
             this.scene.add(loadedmodel);

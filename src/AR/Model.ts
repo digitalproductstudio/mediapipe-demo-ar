@@ -1,5 +1,5 @@
 import * as THREE from "three";
-import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
+import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader.js";
 
 export class Model {
     private loader: GLTFLoader;
@@ -16,7 +16,7 @@ export class Model {
     }
 
     public loadModel(callback: (model: THREE.Object3D) => void) {
-        this.loader.load(this.modelPath, (gltf) => {
+        this.loader.load(this.modelPath, (gltf: THREE.GLTF) => {
             this.model = gltf.scene as THREE.Object3D;
             this.model.scale.copy(this.scale);
             this.model.position.copy(this.position);
