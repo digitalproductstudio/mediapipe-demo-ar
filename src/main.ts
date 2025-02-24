@@ -1,3 +1,4 @@
+import { displayLandmarks } from "./lib/display";
 import { hasGetUserMedia } from "./lib/utils";
 import "./main.css";
 
@@ -83,17 +84,20 @@ async function enableWebcam() {
       canvasElement.height = video.videoHeight;
       console.log(`Video dimensions: ${video.videoWidth} x ${video.videoHeight}`);
     });
+
+    predictWebcam();
   } 
   catch(e) {
     console.error(e);
   }
 }
 async function predictWebcam() {
+  console.log('prediction can be done');
   if(!video) return;
 
   // check when last predicted
   const now = Date.now();
-  if(video.currentTime === lastVideoTime) {
+  if(video.currentTime !== lastVideoTime) {
     // update the video time
     lastVideoTime = video.currentTime;
     // predict
@@ -106,7 +110,16 @@ async function predictWebcam() {
 
   // update the dimensions of the canvas
   canvasElement.style.height = `${video.videoHeight}px`;
+  video.style.height = `${video.videoHeight}px`;
   canvasElement.style.width = `${video.videoWidth}px`;
+  video.style.width = `${video.videoWidth}px`;
+
+  if(results) {
+    console.log('test');
+    // display landmarks
+    displayLandmarks();
+    
+  }
 
 
   // by restoring the canvas, we can draw the results
