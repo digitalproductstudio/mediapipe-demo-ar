@@ -38,6 +38,8 @@ async function init() {
     await enableWebcam();
     console.log("Webcam enabled");
   
+    await predictWebcam();
+
   } catch(e) {
     console.error(e);
   }
@@ -77,15 +79,15 @@ async function enableWebcam() {
   try {
     const stream = await navigator.mediaDevices.getUserMedia(videoOptions);
     video.srcObject = stream;
-    video.play();
 
-    video.addEventListener('loadeddata', () => {
-      canvasElement.width = video.videoWidth;
-      canvasElement.height = video.videoHeight;
-      console.log(`Video dimensions: ${video.videoWidth} x ${video.videoHeight}`);
+    await new Promise<void>((resolve) => {
+      video.addEventListener('loadeddata', () => {
+        canvasElement.width = video.videoWidth;
+        canvasElement.height = video.videoHeight;
+        console.log(`Video dimensions: ${video.videoWidth} x ${video.videoHeight}`);
+        resolve();
+      });
     });
-
-    predictWebcam();
   } 
   catch(e) {
     console.error(e);
@@ -110,9 +112,7 @@ async function predictWebcam() {
 
   // update the dimensions of the canvas
   canvasElement.style.height = `${video.videoHeight}px`;
-  video.style.height = `${video.videoHeight}px`;
   canvasElement.style.width = `${video.videoWidth}px`;
-  video.style.width = `${video.videoWidth}px`;
 
   if(results) {
     console.log('test');
