@@ -42,9 +42,24 @@ async function init() {
   }
 }
 
-
-
 async function createGestureRecognizer() {
+  // Load the MediaPipe gesture recognizer
+  // It is a web assembly file, so we need to load it using the FilesetResolver
+  const vision = await FilesetResolver.forVisionTasks(
+    "https://cdn.jsdelivr.net/npm/@mediapipe/tasks-vision@0.10.3/wasm"
+  );
+
+  gestureRecognizer = await GestureRecognizer.createFromOptions(
+    vision,
+    {
+      numHands: 2,
+      runningMode: runningMode,
+      baseOptions: {
+        delegate: "GPU",
+        modelAssetPath: "https://storage.googleapis.com/mediapipe-models/gesture_recognizer/gesture_recognizer/float16/1/gesture_recognizer.task",
+      }
+    }
+  )
 
 }
 async function enableWebcam() {}
