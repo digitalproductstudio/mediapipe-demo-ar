@@ -202,15 +202,10 @@ async function map3DModel(
   const indexFinger = landmarks[8];
   const thumb = landmarks[4];
 
-  // scale
-
   // position
   let mX = (palmBase.x - 0.5) * 2;
   let mY = -(palmBase.y - 0.5) * 2;
   let mZ = -palmBase.z * 2;
-
-  console.log(palmBase);
-  console.log(mX, mY, mZ);
   model.setPosition(mX, mY, mZ);
 
   // rotate
