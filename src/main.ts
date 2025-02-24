@@ -77,7 +77,14 @@ async function enableWebcam() {
     const stream = await navigator.mediaDevices.getUserMedia(videoOptions);
     video.srcObject = stream;
     video.play();
-  } catch(e) {
+
+    video.addEventListener('loadeddata', () => {
+      canvasElement.width = video.videoWidth;
+      canvasElement.height = video.videoHeight;
+      console.log(`Video dimensions: ${video.videoWidth} x ${video.videoHeight}`);
+    });
+  } 
+  catch(e) {
     console.error(e);
   }
 }
