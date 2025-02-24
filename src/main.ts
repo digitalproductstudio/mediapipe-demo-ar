@@ -142,6 +142,22 @@ async function predictWebcam() {
     // display landmarks
     displayLandmarks(canvasCtx, results);
     
+    // iterate over every landmark array
+    results?.landmarks.forEach((landmarks, index) => {
+
+      // get hand of this landmark array
+      const handedness = results?.handedness[index][0];
+      const hand = handedness?.displayName;
+
+      // check if we have a model that corresponds to this hand (e.g. no model needed for Left)
+      const model = SCENE.models.find((model) => model.getHand() === hand);
+
+      // position, rotate and scale the model to the hand
+      if(model) {
+        map3DModel(landmarks, model);
+      }
+    });
+
   }
 
 
@@ -155,4 +171,6 @@ async function predictWebcam() {
   }
 }
 
-async function map3DModel() {}
+async function map3DModel(landmarks, model) {
+  
+}
