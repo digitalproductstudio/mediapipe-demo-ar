@@ -94,7 +94,6 @@ async function enableWebcam() {
   }
 }
 async function predictWebcam() {
-  console.log('prediction can be done');
   if(!video) return;
 
   // check when last predicted
@@ -117,7 +116,7 @@ async function predictWebcam() {
   if(results) {
     console.log('test');
     // display landmarks
-    displayLandmarks();
+    displayLandmarks(canvasCtx, results);
     
   }
 
