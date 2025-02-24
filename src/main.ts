@@ -214,6 +214,20 @@ async function map3DModel(
   model.setPosition(mX, mY, mZ);
 
   // rotate
+  const midX = (indexFinger.x + thumb.x) / 2;
+  const midY = (indexFinger.y + thumb.y) / 2;
 
-  // update the model
+  const dX = midX - palmBase.x;
+  const dY = midY - palmBase.y;
+
+  const angle = -Math.atan2(dY, dX) - Math.PI / 2;
+
+  model.setRotation(0, 0, angle);
+
+
+  // scale
+  const scale = Math.sqrt(dX * dX + dY * dY) * 0.1;
+  model.setScale(scale, scale, scale);
+
+  
 }
