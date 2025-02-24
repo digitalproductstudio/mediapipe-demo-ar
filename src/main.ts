@@ -1,3 +1,5 @@
+import { Scene } from "./AR/Scene";
+import { Model } from "./AR/Model";
 import { displayLandmarks } from "./lib/display";
 import { hasGetUserMedia } from "./lib/utils";
 import "./main.css";
@@ -7,6 +9,7 @@ import {
   GestureRecognizer,
   GestureRecognizerResult
 } from "@mediapipe/tasks-vision";
+import * as THREE from "three";
 
 
 // declare variables
@@ -16,6 +19,10 @@ let gestureRecognizer : GestureRecognizer | undefined;
 let isWebcamRunning : boolean = false;
 let lastVideoTime = -1;
 let results : GestureRecognizerResult | undefined = undefined;
+
+
+let SCENE : Scene
+
 
 // declare DOM elements
 const video = document.querySelector('#webcam') as HTMLVideoElement;
@@ -37,12 +44,30 @@ async function init() {
     
     await enableWebcam();
     console.log("Webcam enabled");
+
+    await createScene();
+    console.log("Scene created");
   
     await predictWebcam();
 
   } catch(e) {
     console.error(e);
   }
+}
+
+async function createScene() {
+  SCENE = new Scene(video.videoWidth, video.videoHeight, ARLayers);
+
+  let bottleabeer = new Model(
+    "beer_bottle/scene.gltf",
+    new THREE.Vector3(0.02, 0.02, 0.02),
+    new THREE.Vector3(0, 0, 0),
+    new THREE.Vector3(0, 0, 0),
+    "Right"
+  );
+
+  SCENE.add3DModel(bottleabeer);
+
 }
 
 async function createGestureRecognizer() {
