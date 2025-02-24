@@ -183,7 +183,7 @@ async function predictWebcam() {
   }
 }
 
-function toggleVisibility(results) {
+function toggleVisibility(results : GestureRecognizerResult | undefined) {
   SCENE.models.forEach((model) => {
     const handIndex = results?.handedness.findIndex(
       (handedness) => handedness[0].displayName === model.getHand()
@@ -194,7 +194,10 @@ function toggleVisibility(results) {
   });
 }
 
-async function map3DModel(landmarks, model) {
+async function map3DModel(
+  landmarks : { x: number, y: number, z: number }[],
+  model : Model
+) {
   const palmBase = landmarks[0];
   const indexFinger = landmarks[8];
   const thumb = landmarks[4];
