@@ -1,3 +1,4 @@
+import { hasGetUserMedia } from "./lib/utils";
 import "./main.css";
 
 import {
@@ -26,7 +27,13 @@ const ARLayers = document.querySelector('#ar-layers') as HTMLElement;
 init();
 
 async function init() {
-  // alert('Hello World');
+  try {
+    await hasGetUserMedia();
+    await createGestureRecognizer();
+    await enableWebcam();
+  } catch(e) {
+    console.error(e);
+  }
 }
 
 
