@@ -21,10 +21,26 @@ export class Scene {
         wrapper.appendChild(this.renderer.domElement);
 
         this.renderer.domElement.id = "layer-3D";
+
+        // lichtbron
+        const light = new THREE.DirectionalLight(0xffffff, 1);
+        light.position.set(0, 2, 5);
+        this.scene.add(light);
+
+        // camera position
+        this.camera.position.z = 1;
      }
 
-    public add3DModel() {}
+    public add3DModel( model ) {
+        this.models.push(model);
+        model.loadModel((loadedmodel) => {
+            this.scene.add(loadedmodel);
+            this.render();
+        })
+    }
 
-    public render() {}
+    public render() {
+        this.renderer.render(this.scene, this.camera);
+    }
 
 }
