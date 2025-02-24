@@ -246,7 +246,10 @@ function renderModels(results: GestureRecognizerResult) {
 
     // position, rotate and scale the model to the hand
     if(model) {
+      // make the model visible
       model.toggleVisibility(true);
+
+      // map the 3D model to the detected landmarks
       map3DModel(landmarks, model);
     }      
   });
